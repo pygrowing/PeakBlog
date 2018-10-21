@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" data-th-fragment="header">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="description" content="">
+    <meta name="author" content="E先生">
+    <meta name="keyword" content="E先生blog,E先生博客,E先生,Java,后端,前端">
+    <link rel="shortcut icon" href="../../admin/img/ioc.png">
+
+    <title>E先生博客后台管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../css/bootstrap-reset.css" th:href="@{/css/bootstrap-reset.css}" rel="stylesheet">
+    <!--external css-->
+    <link href="../../css/assets/font-awesome-4.7.0/css/font-awesome.css" th:href="@{/css/assets/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/admin/style.css" th:href="@{/css/admin/style.css}" rel="stylesheet">
+    <link href="../../css/admin/adminstyle.css" th:href="@{/css/admin/adminstyle.css}" rel="stylesheet">
+    <!--MD&富文本编辑器-->
+    <link href="../../admin/markdown/css/editormd.min.css" th:href="@{/admin/markdown/css/editormd.min.css}" rel="stylesheet">
+    <!-- switchery-->
+    <link rel="stylesheet" type="text/css" href="../../css/assets/switchery/switchery.css" th:href="@{/css/assets/switchery/switchery.css}"/>
+    <!--图片上传-->
+    <link rel="stylesheet" href="../../css/admin/dropify.css" th:href="@{/css/admin/dropify.css}" />
+    <!--SmallPop  -->
+    <link rel="stylesheet" href="../../css/spop.min.css" th:href="@{/css/admin/spop.min.css}"/>
+    
+    
+  </head>
+  
+<body>
+	<!--导航头 start-->
+      <header class="header white-bg">
+              <div class="sidebar-toggle-box">
+                  <i class="fa fa-bars"></i>
+              </div>
+            <!--logo start-->
+            <a href="index.html" class="logo">E先生<span>BLOG</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  通知 start -->
+                <ul class="nav top-menu">
+                   
+                    <!-- 评论下拉通知 start-->
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="badge bg-important">5</span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-red"></div>
+                            <li>
+                                <p class="red">您有5条最新评论</p>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">张三</span>
+                                    <span class="time">刚刚</span>
+                                    </span>
+                                    <span class="message">
+                                        	评论了文章
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini2.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">李四</span>
+                                    <span class="time">10分钟前</span>
+                                    </span>
+                                    <span class="message">
+                                     		评论了文章
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini3.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">王五</span>
+                                    <span class="time">3小时前</span>
+                                    </span>
+                                    <span class="message">
+                                      	评论了文章
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini4.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Jondi Rose</span>
+                                    <span class="time">昨天</span>
+                                    </span>
+                                    <span class="message">
+                                       	 评论了文章
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">查看所有的评论动态</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 评论下拉通知 end -->
+                </ul>
+                <!--  通知 end -->
+            </div>
+            <div class="top-nav " sec:authorize="isAuthenticated()">
+                <!--用户信息 start-->
+                <ul class="nav pull-right top-menu">
+                    <!-- 用户登录退出下拉信息 start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img class="headimg" alt="" src="img/2.png">
+                            <span class="username">E先生</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li><a href="#"><i class=" fa fa-user"></i>个人信息</a></li>
+                            <li><a href="#"><i class="fa fa-key"></i>修改密码</a></li>
+                            <li><a href="#"><i class="fa fa-server"></i>服务器信息</a></li>
+                            <li><a href="javascript:void(0);" onclick="loginout();"><i class="fa fa-sign-out"></i> 退出</a></li>
+                        </ul>
+                    </li>
+                    <!-- 用户登录退出下拉信息 end -->
+                </ul>
+                <!--用户信息 end-->
+            </div>
+        </header>
+      <!--导航头 end-->
+		 <form th:action="@{/logout}" method="post" class="out">
+			<input type="hidden" value="退出">
+		</form>
+

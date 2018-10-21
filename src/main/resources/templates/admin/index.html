@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-cn"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+ <head th:replace="~{fragments/header :: header}"></head>
+
+  
+  <section id="container">
+      
+      <!--侧边栏 start-->
+      <div th:replace="~{fragments/sidebar :: sidebar}">...</div>
+      <!--侧边栏 end-->
+      <!--主内容 start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--博文概况 start-->
+              <div class="row state-overview">
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol terques">
+                              <i class="fa fa-users"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class="count">
+                                  520
+                              </h1>
+                              <p>今日访客量</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol red">
+                              <i class="fa fa-comments"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count2">
+                                  18
+                              </h1>
+                              <p>今日评论量</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol yellow">
+                              <i class="fa fa-comments"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count3">
+                                  1234
+                              </h1>
+                              <p>评论总数</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol blue">
+                              <i class="fa fa-eye"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count4">
+                                  878
+                              </h1>
+                              <p>文章浏览总数</p>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+              <!--博文概况 end-->
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <!--时间线 start-->
+                      <section class="panel">
+                          <div class="panel-body">
+                                  <div class="text-center mbot30">
+                                      <h3 class="timeline-title">时间线</h3>
+                                      <p class="t-info">最近博文时间线</p>
+                                  </div>
+
+                                  <div class="timeline">
+                                      <article class="timeline-item">
+                                          <div class="timeline-desk">
+                                              <div class="panel">
+                                                  <div class="panel-body">
+                                                      <span class="arrow"></span>
+                                                      <span class="timeline-icon red"></span>
+                                                      <span class="timeline-date">08:25 am</span>
+                                                      <h1 class="red">2018-06-07</h1>
+                                                      <p>测试文章！！test  test</p>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </article>
+                                      <article class="timeline-item alt">
+                                          <div class="timeline-desk">
+                                              <div class="panel">
+                                                  <div class="panel-body">
+                                                      <span class="arrow-alt"></span>
+                                                      <span class="timeline-icon green"></span>
+                                                      <span class="timeline-date">10:00 am</span>
+                                                      <h1 class="green">2018-06-03</h1>
+                                                      <p>谈谈我的桌面</p>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </article>
+                                      <article class="timeline-item">
+                                          <div class="timeline-desk">
+                                              <div class="panel">
+                                                  <div class="panel-body">
+                                                      <span class="arrow"></span>
+                                                      <span class="timeline-icon blue"></span>
+                                                      <span class="timeline-date">11:35 am</span>
+                                                      <h1 class="blue">2018-05-28</h1>
+                                                      <p>font awesome图标库在应用中的使用</p>
+                                                      <div class="album">
+                                                          <a href="#">
+                                                              <img alt="" src="img/sm-img-1.jpg">
+                                                          </a>
+                                                          <a href="#">
+                                                              <img alt="" src="img/sm-img-2.jpg">
+                                                          </a>
+                                                          <a href="#">
+                                                              <img alt="" src="img/sm-img-3.jpg">
+                                                          </a>
+                                                          <a href="#">
+                                                              <img alt="" src="img/sm-img-1.jpg">
+                                                          </a>
+                                                          <a href="#">
+                                                              <img alt="" src="img/sm-img-2.jpg">
+                                                          </a>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </article>
+                                      <article class="timeline-item alt">
+                                          <div class="timeline-desk">
+                                              <div class="panel">
+                                                  <div class="panel-body">
+                                                      <span class="arrow-alt"></span>
+                                                      <span class="timeline-icon purple"></span>
+                                                      <span class="timeline-date">3:20 pm</span>
+                                                      <h1 class="purple">2018-05-27</h1>
+                                                      <p>基于 JFinal 的个人博客 zrlog</p>
+                                                      <div class="notification">
+                                                          ZrLog是使用Java开发的博客/CMS程序，具有简约，易用，组件化，内存占用低等特点
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </article>
+                                      <article class="timeline-item">
+                                          <div class="timeline-desk">
+                                              <div class="panel">
+                                                  <div class="panel-body">
+                                                      <span class="arrow"></span>
+                                                      <span class="timeline-icon light-green"></span>
+                                                      <span class="timeline-date">07:49 pm</span>
+                                                      <h1 class="light-green">2018-05-27</h1>
+                                                      <p>springboot整合springdata的使用方式</p>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </article>
+                                  </div>
+
+                                  <div class="clearfix">&nbsp;</div>
+                              </div>
+                      </section>
+                      <!--时间线 end-->
+                  </div>
+              </div>
+
+          </section>
+      </section>
+      <!--主内容 end-->
+
+      <!--页脚 start-->
+      <div th:replace="~{fragments/footer :: footer}">...</div>
+      <!--页脚 end-->
+  </section>
+   
+
+  </body>
+</html>

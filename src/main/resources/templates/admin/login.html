@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" data-th-fragment="header">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="E先生">
+    <meta name="keyword" content="E先生blog,E先生博客,E先生,Java,后端,前端">
+    <link rel="shortcut icon" href="../../admin/img/ioc.png" th:href="@{/admin/img/ioc.png}" >
+
+    <title>E先生博客后台管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!--external css-->
+    <link href="../../css/assets/font-awesome/css/font-awesome.css" th:href="@{/css/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="../../css/admin/style.css" th:href="@{/css/admin/style.css}" rel="stylesheet">
+    <link href="../../css/admin/adminstyle.css" th:href="@{/css/admin/adminstyle.css}" rel="stylesheet">
+</head>
+
+  <body class="login-body">
+  	
+    <div class="container">
+      <form class="form-signin" th:action="@{~/login}" method="post">
+        <h2 class="form-signin-heading">请输入用户名和密码</h2>
+        <div class="login-wrap">
+            <input type="text" class="form-control" id="username" name="username" maxlength="50" placeholder="用户名" autofocus>
+            <input type="password" class="form-control" id="password" name="password" maxlength="30" placeholder="密码">
+            <button class="btn btn-lg btn-login btn-block" type="submit"><i class="fa fa-sign-in" ></i><span style="padding-left: 10px">登录</span></button>
+        </div>
+        <div th:if="${loginError}">
+			<p class="blog-label-error" th:text="${errorMsg}"></p>
+		</div>
+      </form>
+    </div>
+
+    <script src="../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
+	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cn"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+ <head th:replace="~{fragments/header :: header}"></head>
+
+  
+  <section id="container">
+      
+      <!--侧边栏 start-->
+      <div th:replace="~{fragments/sidebar :: sidebar}">...</div>
+      <!--侧边栏 end-->
+      <!--主内容 start-->
+      <section id="main-content">
+          <section class="wrapper">
+	          <div class="row">
+	          	<div class="col-lg-12">
+	                  <div class="border-head">
+	                      <h3>文章撰写</h3>
+	                  </div>
+	            </div>
+	          </div>
+	          
+	          <!--编辑器start -->
+            <!-- <form action="#" id="form1" th:action="@{/admin/saveblog}" th:object="${blog}" method="post"> -->
+          	  <!-- <form action="" id="form1" method="post" onsubmit="return false;"	> -->
+          	  <form id="form1">
+          		<div class="row">
+          			<div class="col-md-12 col-sm-12 col-xs-12" id="editButton">
+          				<button class="btn btn-default" onclick="ajaxSubmit()"><i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;存为草稿</button>
+          				<button id="fabiao" class="btn btn-primary" type="button"><i class="fa fa-paper-plane bigger-110"></i>&nbsp;&nbsp;发表</button>
+          			</div>
+          		</div>
+          		
+          		<div class="row">
+          			<div class="col-md-12 col-sm-12 col-xs-12 col-lg-9">
+          				<div class="form-group" >
+          					<div class="col-md-6 col-xs-12" style="padding-left: 0px;padding-bottom: 10px;">
+          						<input type="text" class="form-control" placeholder="请输入文章标题" name="title" maxlength="50" id="blogTitle">
+          						<input type="hidden" name="id" th:value="*{id}" id="blogId">
+          					</div>
+          					<div class="col-md-3 col-xs-12">
+          						<div class="input-group m-bot15">
+		                          <span class="input-group-addon">/post/</span>
+		                          <input type="text" class="form-control" placeholder="请输入文章别名" name="post" maxlength="50" id="blogPost">
+		                      </div>
+          					</div>
+          					<div class="col-md-3 col-xs-12" style="padding-right: 0px;">
+          						<!--<div class="btn-row">
+                          <div class="btn-group" data-toggle="buttons">
+                              <label class="btn btn-default">
+                                  <input type="checkbox"> 富文本
+                              </label>
+                              <label class="btn btn-default active">
+                                  <input type="checkbox"> markdown
+                              </label>
+                          </div>
+                      </div>-->
+          					</div>
+          				</div>
+          				
+          				<div id="editorDivWrapper" >
+          				
+	          				<div class="editormd" id="editorDiv" style="margin-left: 0px;margin-right: 0px;z-index:1003;">
+							  <textarea class="editormd-markdown-textarea"  style="display: none;" name="content" id="blogContent"></textarea>
+							  
+							  <textarea class="editormd-html-textarea" name="htmlContent" id="blogHtml"></textarea>
+							</div>
+          				
+          				</div>
+          			
+          			</div>
+          			
+          			<div class="col-md-12 col-lg-3 col-xs-12 full-screen-hide">
+          				<div class="row">
+          					<div class="form-group col-xs-12">
+          						<!--图片上传插件-->
+          						<div style="height: 200px;margin-bottom: 20px;">
+          							 <input type="file" id="input-file-events" class="dropify" name="MutiImage"/>
+          						</div>
+          						<!--分类-->
+          						<div>
+          							<section class="panel">
+          								<header class="panel-heading">
+			                              	分类
+			                          </header>
+			                          <div class="radios scrollBar">
+			                          	<label class="label_radio" for="radio-01">
+				                              <input name="type" id="" value="1" type="radio" checked/> 默认分类
+				                          </label>
+				                          <label class="label_radio" for="radio-02">
+				                              <input name="type" id="" value="2" type="radio"/> 学习
+				                          </label>
+				                          <label class="label_radio" for="radio-03">
+				                              <input name="type" id="" value="3" type="radio"/> Java
+				                          </label>
+				                          <label class="label_radio" for="radio-03">
+				                              <input name="type" id="" value="4" type="radio"/> spring
+				                          </label>
+				                          <label class="label_radio" for="radio-03">
+				                              <input name="type" id="" value="5" type="radio"/> 手办
+				                          </label>
+				                          <label class="label_radio" for="radio-03">
+				                              <input name="type" id="" value="6" type="radio"/> 家具
+				                          </label>
+				                          <label class="label_radio" for="radio-03">
+				                              <input name="type" id="" value="7" type="radio"/> 旅行
+				                          </label>
+			                          </div>
+			                          <input type="hidden" name="select-radio" value="">
+          							</section>
+          						</div>
+          						<!--标签-->
+          						<div>
+          							<section class="panel">
+			                          <header class="panel-heading">
+			                              	标签
+			                          </header>
+			                          <div class="panel-body">
+			                              <input name="tags" id="tagsinput" class="tagsinput" value="" />
+			                          </div>
+			                          <div class="usesTage scrollBar" style="">
+			                          	<input name="useTage" id="useTage" class="useTage" value="1,2,3,4,5" style="display: none;">
+			                          </div>
+			                          <!--找到程序入口，设置为一个方法，删除与增加重复调用方法就行了-->
+			                      </section>
+          						</div>
+          						
+          					</div>
+          				</div>
+          				
+          			</div>
+          			
+          		</div>
+          		
+          		<!--switchery start-->
+              <div class="row">
+                  <div class="col-md-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                               	其余设置
+                          <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                          </span>
+                          </header>
+                          <div class="panel-body">
+                              <div class="row m-bot20">
+                                  <div class="col-md-3 col-md-offset-1">
+                                  		<span style="font-size: 16px">允许评论</span>
+                                      <input type="checkbox"  class="js-switch" name="canComment" value="1" checked="checked" th:checked="true"/>
+                                  </div>
+                                  <div class="col-md-3 col-md-offset-1">
+                                  		<span style="font-size: 16px">推荐</span>
+                                      <input type="checkbox" class="js-switch" name="recommended" value="1" />
+                                  </div>
+                                  <div class="col-md-3 col-md-offset-1">
+                                  		<span style="font-size: 16px">私有</span>
+                                      <input type="checkbox" class="js-switch" name="canPrivate" value="1" />
+                                  </div>
+                                 
+                              </div>
+
+                          </div>
+                      </section>
+                  </div>
+              </div>
+              <!--switchery end-->
+          	</form>
+	          	
+	         
+	          	
+	          <!--编辑器end -->
+
+          </section>
+      </section>
+      <!--主内容 end-->
+
+      <!--页脚 start-->
+      <div th:replace="~{fragments/footer :: footer}">...</div>
+      <!--页脚 end-->
+  </section>
+  
+    <!-- JS -->
+	<!--tagjs start-->
+	<script src="../../js/admin/jquery.tagsinput.js" th:src="@{/js/admin/jquery.tagsinput.js}"></script>
+	<script src="../../js/admin/taginput.js" th:src="@{/js/admin/taginput.js}"></script>
+	<!--tagjs end-->
+
+	<!--MD&富文本编辑器-->
+	<script src="../../admin/markdown/js/editormd.min.js" th:src="@{/admin/markdown/js/editormd.min.js}"></script>
+	<script src="../../js/admin/editorDeploy.js" th:src="@{/js/admin/editorDeploy.js}"></script>
+    <script src="../../js/summernote.js" th:src="@{/js/admin/summernote.js}"></script>
+    
+    <!--bootstrap-switch-->
+  	<script src="../../css/assets/switchery/switchery.js" th:src="@{/css/assets/switchery/switchery.js}"></script>
+    <!--图片上传插件-->
+    <script src="../../js/admin/dropify.js" th:src="@{/js/admin/dropify.js}"></script>
+    <!--测试用-->
+    <script src="../../js/jquery.js" th:src="@{/js/jquery.form.js}"></script>
+    <script src="../../js/admin/blogedit.js" th:src="@{/js/admin/blogedit.js}"></script>
+      
+  </body>
+</html>

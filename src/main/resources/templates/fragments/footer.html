@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!--页脚 start-->
+	<footer class="site-footer" data-th-fragment="footer">
+	    <div class="text-center">
+	        2017-2018 &copy; E先生Blog后台管理系统.
+	    </div>
+	    
+	     <!-- JS放置在文档的末尾，这样页面加载速度更快。 -->
+		<script src="../../js/jquery.js" th:src="@{/js/jquery.js}"></script>
+		<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+		
+		<!--common script for all pages-->
+		<script src="../../js/admin/common-scripts.js" th:src="@{/js/admin/common-scripts.js}"></script>
+		
+		<!--script for this page-->
+		<script src="../../js/admin/count.js" th:src="@{/js/admin/count.js}"></script>
+		
+		 <script src="../../js/admin/spop.min.js" th:src="@{/js/admin/spop.min.js}"></script>
+      
+      	<script th:inline="javascript">
+            var menuId = [[${staff}]];
+            if(menuId == 1){
+            	$("#homemenu").addClass("active");
+            }else if(menuId == 2){
+            	$("#editmenu").addClass("active");
+            }
+        </script>
+	 </footer>
+	 <!--页脚 end-->
+      
+</body>
+</html>
