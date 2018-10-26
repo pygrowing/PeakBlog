@@ -36,7 +36,7 @@ public class UploadController {
 				photo.getContentType().lastIndexOf("/") + 1);
 		// 通过ClassPath路径获取要使用的配置文件
 		ClassPathResource classPathResource = new ClassPathResource(
-				"fastdfs_client.conf");
+				"fastdfs_client.conf"); 
 		// 进行客户端访问的整体配置，需要知道配置文件的完整路径
 		try {
 			ClientGlobal.init(classPathResource.getClassLoader()
