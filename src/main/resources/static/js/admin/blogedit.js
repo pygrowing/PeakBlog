@@ -16,7 +16,7 @@ $("#fabiao").click(function(){
 	if(blogContent =='' ||blogContent==null ||blogContent==undefined){
 		spop({template: '文章内容不能为空',position  : 'top-center',style: 'error',autoclose: 4000});
 		return false;
-	}
+	} 
 	if(imageFile =='' ||imageFile==null ||imageFile==undefined){
 		if(id == '' ||id ==null ||id ==undefined){
 			spop({template: '请选择上传一张图片用于文章封面',position  : 'top-center',style: 'error',autoclose: 4000});
