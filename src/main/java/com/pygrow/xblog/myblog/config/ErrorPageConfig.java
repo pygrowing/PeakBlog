@@ -20,7 +20,9 @@ public class ErrorPageConfig {
 		return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
 			@Override
 			public void customize(ConfigurableWebServerFactory factory) {
+				factory.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST,"/errorpage/error-400.html"));
 				factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND,"/errorpage/error-400.html"));
+				factory.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR,"/errorpage/error-500.html"));
 			}
 		};
 	}

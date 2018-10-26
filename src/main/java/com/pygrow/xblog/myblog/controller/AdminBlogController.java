@@ -3,6 +3,8 @@ package com.pygrow.xblog.myblog.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pygrow.xblog.myblog.entity.Blog;
 import com.pygrow.xblog.myblog.service.BlogService;
+import com.pygrow.xblog.myblog.util.ToolUtil;
 import com.pygrow.xblog.myblog.vo.Response;
 
 /**
@@ -30,6 +33,7 @@ import com.pygrow.xblog.myblog.vo.Response;
 @Controller
 @RequestMapping("/admins")
 public class AdminBlogController {
+	private static Logger logger = LoggerFactory.getLogger(AdminBlogController.class);
 	
 	@Autowired
 	private BlogService blogService;
@@ -37,18 +41,23 @@ public class AdminBlogController {
 	@PostMapping("/saveblog")
 	@ResponseBody
 	public ResponseEntity<Response> saveBlog(Blog blog,MultipartFile MutiImage){
-		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-		String createBlogTime = df.format(new Date());
-		if (MutiImage != null) {	// 现在有文件上传
-//			System.out.println("【*** 文件上传 ****】name = " + name); 
-			System.out.println("【*** 文件上传 ****】photoName = " + MutiImage.getName());
-			System.out.println("【*** 文件上传 ****】photoContentType = " + MutiImage.getContentType());
-			System.out.println("【*** 文件上传 ****】photoSize = " + MutiImage.getSize());
-			
+		UploadController uploadController = new UploadController();
+		if(MutiImage.getSize() == 0) {
+			logger.info(">>>>修改中没有替换图片");
+		}else {
+			logger.info(">>>>图片上传");
+//			String imagePath = uploadController.upload(MutiImage);
 		}
+		//判断博客是新增还是修改
+		if(blog.getId() != null) {
+			
+		}else {
+			blog.setCreateTime(ToolUtil.getNowDateShort());
+		}
+		
+		
 		String redirectUrl = "admin/index";
-		System.out.println(createBlogTime);
-		return ResponseEntity.ok().body(new Response(true, "博文发表成功     "+createBlogTime, redirectUrl));
+		return ResponseEntity.ok().body(new Response(true, "博文发表成功     "+ToolUtil.getTimeShort(), redirectUrl));
 	}
 	
 

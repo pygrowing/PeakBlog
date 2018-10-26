@@ -68,5 +68,8 @@ dependencies {
 	//compile group: 'org.csource', name: 'fastdfs-client-java', version: '1.27-RELEASE'
 	compile fileTree(dir:'libs',include:['*.jar'])
 
+	//compile("com.github.tobato:fastdfs-client:1.25.2-RELEASE")
+	
+	
 
 }

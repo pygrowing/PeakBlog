@@ -7,7 +7,8 @@ $("#fabiao").click(function(){
 	var blogTitle=$('#blogTitle').val();
 	var blogContent=$('#blogContent').val();
 	var tags=$('#tagsinput').val();
-//	var imageFile = $('#input-file-events').val();
+	var imageFile = $('#input-file-events').val();
+	var id = $('#blogId').val();
 	if(blogTitle =='' ||blogTitle==null ||blogTitle==undefined){
 		spop({template: '文章标题不能为空',position  : 'top-center',style: 'error',autoclose: 4000});
 		return false;
@@ -16,10 +17,14 @@ $("#fabiao").click(function(){
 		spop({template: '文章内容不能为空',position  : 'top-center',style: 'error',autoclose: 4000});
 		return false;
 	}
-//	if(imageFile =='' ||imageFile==null ||imageFile==undefined){
-//		spop({template: '请选择上传一张图片用于文章封面',position  : 'top-center',style: 'error',autoclose: 4000});
-//		return false;
-//	}
+	if(imageFile =='' ||imageFile==null ||imageFile==undefined){
+		if(id == '' ||id ==null ||id ==undefined){
+			spop({template: '请选择上传一张图片用于文章封面',position  : 'top-center',style: 'error',autoclose: 4000});
+			return false;
+		}else{
+			alert("修改");
+		}
+	}
 	if(tags =='' ||tags==null ||tags==undefined){
 		spop({template: '请选择至少一个文章标签',position  : 'top-center',style: 'error',autoclose: 4000});
 		return false;
@@ -30,7 +35,6 @@ $("#fabiao").click(function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	
 	var form = new FormData(document.getElementById("form1"));
-	alert(form);
 	$.ajax({
 	    url: "/admins/saveblog",
 	    type: "POST",
