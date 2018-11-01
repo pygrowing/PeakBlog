@@ -1,6 +1,7 @@
 package com.pygrow.xblog.myblog.util;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -44,13 +45,14 @@ public class ToolUtil {
 	/**
 	 * 获取时间
 	 * @return 返回短时间格式 yyyy-MM-dd
+	 * @throws ParseException 
 	 */
-	public static Date getNowDateShort() {
+	public static Date getNowDateShort() throws ParseException {
 	    Date currentTime = new Date();
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	    String dateString = formatter.format(currentTime);
-	    ParsePosition pos = new ParsePosition(8);
-	    Date currentTime_2 = formatter.parse(dateString, pos);
+//	    ParsePosition pos = new ParsePosition(8);
+	    Date currentTime_2 = formatter.parse(dateString);
 	    return currentTime_2;
 	  }
 	
@@ -59,12 +61,17 @@ public class ToolUtil {
 	 * @return 返回时间类型 yyyy-MM-dd HH:mm:ss
 	 */
 	public static Date getNowDate() {
-	    Date currentTime = new Date();
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	    String dateString = formatter.format(currentTime);
-	    ParsePosition pos = new ParsePosition(8);
-	    Date currentTime_2 = formatter.parse(dateString, pos);
-	    return currentTime_2;
+//	    Date currentTime = new Date();
+//	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//	    String dateString = formatter.format(currentTime);
+//	    ParsePosition pos = new ParsePosition(8);
+//	    Date currentTime_2 = formatter.parse(dateString, pos);
+//	    return currentTime_2;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(new Date());
+		ParsePosition pos = new ParsePosition(8);
+		Date currentTime_2 = formatter.parse(dateString, pos);
+		return currentTime_2;
 	  }
 	
     /**
@@ -78,7 +85,7 @@ public class ToolUtil {
 	 */
 	  public static String getStringDateShort() {
 	    Date currentTime = new Date();
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String dateString = formatter.format(currentTime);
 	    return dateString;
 	  }
