@@ -1,9 +1,32 @@
-function ajaxSubmit(){
-	alert("点击");
-		
-}
+$("#draft").click(function(){
+	var drafts = '0';
+	saveBlog(drafts);
+});
 
-$("#fabiao").click(function(){
+$("#publish").click(function(){
+	var drafts = '1';
+	saveBlog(drafts);
+});
+
+function onblurs(){ 
+	var number = /^[0-9]*$/;
+	var blank = /\s/;
+	var post = $("#blogPost").val();
+	
+	if(post != ""){
+		if (number.test(post)) {
+		　　　spop({template: '请不要将POST设置为纯数字,防止与id重合',position  : 'top-center',style: 'error',autoclose: 4000});
+		　　　return false;
+		}
+		if(blank.test(post)){
+			spop({template: '请不要在POST中输入包含空格在内的等非法字符',position  : 'top-center',style: 'error',autoclose: 4000});
+			return false;
+		}
+	}
+} 
+
+
+function saveBlog(drafts){
 	var blogTitle=$('#blogTitle').val();
 	var blogContent=$('#blogContent').val();
 	var tags=$('#tagsinput').val();
@@ -35,6 +58,7 @@ $("#fabiao").click(function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	
 	var form = new FormData(document.getElementById("form1"));
+	form.append("drafts",drafts);
 	$.ajax({
 	    url: "/admins/saveblog",
 	    type: "POST",
@@ -50,6 +74,16 @@ $("#fabiao").click(function(){
 		 success: function(data){
 			 if (data.success) {
 				 spop({template: data.message,position  : 'top-right',style: 'success',autoclose: 4000});
+//				 alert(data.body.blogId);
+				 var file = document.getElementById("input-file-events");
+		         // for IE, Opera, Safari, Chrome
+		         if (file.outerHTML) {
+		             file.outerHTML = file.outerHTML;
+		         } else { 
+		             file.value = "";
+		         }
+				 $('#blogId').val(data.body.blogId);
+				 $('#input-file-events').attr('data-default-file',data.body.MutiImage);
 			 } else {
 				 spop({template: data.message,position  : 'top-right',style: 'error',autoclose: 4000});
 			 }
@@ -59,4 +93,4 @@ $("#fabiao").click(function(){
 	    	 spop({template: '请求发生错误',position  : 'top-right',style: 'error',autoclose: 4000});
 	     }
 	})
-});
+}
