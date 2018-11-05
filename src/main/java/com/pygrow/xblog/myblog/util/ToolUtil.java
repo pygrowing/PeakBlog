@@ -101,6 +101,17 @@ public class ToolUtil {
 	    return dateString;
 	  }
 	 
+	  
+	  public static boolean isNumber(String num) {
+		  boolean result=num.matches("[0-9]+");
+		  if (result == true) { 
+              System.out.println("该字符串是纯数字");
+              return true;
+		  }else{
+              System.out.println("该字符串不是纯数字");
+              return false;
+		  }
+	  }
 	
 
 }
