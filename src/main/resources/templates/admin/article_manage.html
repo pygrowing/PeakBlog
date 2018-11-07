@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+ <head th:replace="~{fragments/header :: header}"></head>
+ 
+  <section id="container">
+  
+      <!--侧边栏 start-->
+      <div th:replace="~{fragments/sidebar :: sidebar}">...</div>
+      <!--侧边栏 end-->
+      
+      <!--主内容 start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <div class="row">
+              	<div class="col-lg-12">
+                      <div class="border-head">
+                          <h3>文章管理</h3>
+                      </div>
+                </div>
+              </div>
+              
+              <div>
+              	<table id="bligList" lay-filter="bligList"></table>
+              </div>
+              <script type="text/html" id="barDemo">
+				<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+ 				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+			  </script>
+
+          </section>
+      </section>
+      <!--主内容 end-->
+
+      <!--页脚 start-->
+      <div th:replace="~{fragments/footer :: footer}">...</div>
+      <!--页脚 end-->
+      
+  </section>
+  
+    <!-- JS放置在文档的末尾，这样页面加载速度更快。 -->
+	<script src="../../admin/layui/layui.all.js" th:src="@{/admin/layui/layui.js}" charset="utf-8"></script>
+	<script src="../../js/admin/articleManage.js" th:src="@{/js/admin/articleManage.js}"></script>
+  <script>
+
+
+  </script>
+
+  </body>
+</html>

@@ -29,8 +29,8 @@
           	  <form id="form1">
           		<div class="row">
           			<div class="col-md-12 col-sm-12 col-xs-12" id="editButton">
-          				<button class="btn btn-default" onclick="ajaxSubmit()"><i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;存为草稿</button>
-          				<button id="fabiao" class="btn btn-primary" type="button"><i class="fa fa-paper-plane bigger-110"></i>&nbsp;&nbsp;发表</button>
+          				<button id="draft" class="btn btn-default" type="button"><i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;存为草稿</button>
+          				<button id="publish" class="btn btn-primary" type="button"><i class="fa fa-paper-plane bigger-110"></i>&nbsp;&nbsp;发表</button>
           			</div>
           		</div>
           		
@@ -45,7 +45,7 @@
           					<div class="col-md-3 col-xs-12">
           						<div class="input-group m-bot15">
 		                          <span class="input-group-addon">/post/</span>
-		                          <input type="text" class="form-control" placeholder="请输入文章别名" name="post" maxlength="50" id="blogPost">
+		                          <input type="text" class="form-control" placeholder="请输入文章别名" name="post" maxlength="50" id="blogPost" onblur="onblurs()">
 		                      </div>
           					</div>
           					<div class="col-md-3 col-xs-12" style="padding-right: 0px;">
@@ -79,7 +79,7 @@
           					<div class="form-group col-xs-12">
           						<!--图片上传插件-->
           						<div style="height: 200px;margin-bottom: 20px;">
-          							 <input type="file" id="input-file-events" class="dropify" name="MutiImage"  data-default-file=""/>
+          							 <input type="file" id="input-file-events" class="dropify" name="MutiImage" th:value="*{handImage}"  data-default-file=""/>
           						</div>
           						<!--分类-->
           						<div>
@@ -199,7 +199,7 @@
     <!--图片上传插件-->
     <script src="../../js/admin/dropify.js" th:src="@{/js/admin/dropify.js}"></script>
     <!--测试用-->
-    <script src="../../js/jquery.js" th:src="@{/js/jquery.form.js}"></script>
+    <script src="../../js/jquery.form.js" th:src="@{/js/jquery.form.js}"></script>
     <script src="../../js/admin/blogedit.js" th:src="@{/js/admin/blogedit.js}"></script>
       
   </body>
