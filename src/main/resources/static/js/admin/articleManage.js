@@ -6,7 +6,7 @@ layui.use('table', function(){
 	    ,url:'/admins/showBlog'
 	    ,limits : [10,15,20,25]
 	    ,limit : 10
-	    ,height: 515
+//	    ,height: 515
 	    ,toolbar: '#toolbarDemo'
 	    ,defaultToolbar: ['filter']
 	    ,page:true
@@ -20,12 +20,17 @@ layui.use('table', function(){
 	      ,{field:'drafts', width:95, title: '是否草稿',templet: function(d){
 	    	  return d.drafts == 0?"否":"是";
 	      }}
-	      ,{field:'createTime', width:140, title: '创建时间',templet: function(d){
-	    	  var date =  new Date(d.createTime);
-	    	  var mon = date.getMonth() + 1;
-	    	  var day = date.getDate();
-	    	  var mydate = date.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
-	    	  return mydate;
+	      ,{field:'createTime', width:130, title: '创建时间',templet: function(d){
+	    	  if(d.createTime == null || d.createTime=="" ||d.createTime ==undefined){
+	    		  return "";
+	    	  }else{
+	    		  var date =  new Date(d.createTime);
+		    	  var mon = date.getMonth() + 1;
+		    	  var day = date.getDate();
+		    	  var mydate = date.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
+		    	  return mydate;
+	    	  }
+	    	 
 	      }}
 	      ,{fixed: 'right', title:'操作',width: 165, align:'center', toolbar: '#barDemo'}
 	    ]]
@@ -56,28 +61,28 @@ layui.use('table', function(){
 	  
 	  //头工具栏事件
 	  table.on('toolbar(bligList)', function(obj){
-		  layer.alert("1");
-//		layer.alert(obj);
 	    var checkStatus = table.checkStatus(obj.config.id);
-	    layer.alert(obj.event);
 	    if(obj.event == 'getCheckData'){
 	    	 var data = checkStatus.data;
-	    	 layer.alert(JSON.stringify(data));
-//	    	 layer.alert(JSON.stringify(data));
+	    	 var datas =JSON.stringify(data);
+	    	 var jsondata = JSON.parse(datas);
+	    	 if(jsondata.length == 0){
+//	    		 var index = $(".layui-laypage-skip").find("input").val();
+//	    		 alert(index);
+	    		 layer.alert("请勾选至少一条数据！");
+	    	 }else{
+	    		 layer.confirm('真的删除选中数据吗', function(){
+	    			 var ids= new Array();
+			    	 for (var i = 0; i < jsondata.length; i++) {
+			 			ids[i] = jsondata[i].id;
+			 		}
+			    	 layer.alert(ids.toString());
+	    		 });
+	    	 }
 	    }
-	    
-//	    switch(obj.event){
-//	      case 'getCheckData':
-//	        var data = checkStatus.data;
-//	        layer.alert(JSON.stringify(data));
-//	      break;
-//	      case 'getCheckLength':
-//	        var data = checkStatus.data;
-//	        layer.msg('选中了：'+ data.length + ' 个');
-//	      break;
-//	      case 'isAll':
-//	        layer.msg(checkStatus.isAll ? '全选': '未全选');
-//	      break;
-//	    };
 	  });
+	  
+	  
+	  
+	  
 });
