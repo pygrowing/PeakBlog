@@ -24,6 +24,26 @@
               </div>
               
               <div>
+              	<div class="searchTable" style="">
+				  搜索关键字：
+				  <div class="layui-inline">
+				    <input class="layui-input" name="id" id="condition" autocomplete="off">
+				  </div>
+				  
+				   <form class="layui-form layui-form-pane" action="">
+					  	<div class="layui-input-inline">
+						  <select name="modules" lay-verify="required" lay-search="">
+						      <option value="1">layer</option>
+						      <option value="2">form</option>
+						      <option value="3">layim</option>
+						  </select>
+						</div>
+				   </form>
+				  
+				  
+				  
+				  <div class="layui-btn" data-type="reload">搜索</div >
+				</div>
               	<table id="bligList" lay-filter="bligList"></table>
               </div>
               <script type="text/html" id="barDemo">
@@ -31,6 +51,12 @@
   				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
  				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 			  </script>
+			  
+			  <script type="text/html" id="toolbarDemo">
+  				<div class="layui-btn-container">
+					<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="getCheckData"><i class="fa fa-trash" aria-hidden="true"></i></a>
+  				</div>
+			 </script>
 
           </section>
       </section>
@@ -43,7 +69,8 @@
   </section>
   
     <!-- JS放置在文档的末尾，这样页面加载速度更快。 -->
-	<script src="../../admin/layui/layui.all.js" th:src="@{/admin/layui/layui.js}" charset="utf-8"></script>
+    <script src="../../js/json3.min.js" th:src="@{/js/json3.min.js}"></script>
+	<script src="../../admin/layui/layui.all.js" th:src="@{/admin/layui/layui.all.js}" charset="utf-8"></script>
 	<script src="../../js/admin/articleManage.js" th:src="@{/js/admin/articleManage.js}"></script>
   <script>
 
