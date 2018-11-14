@@ -142,7 +142,7 @@ layui.use(['form', 'table'], function(){
 		    	  title = $('#condition').val();
 		      }
 //		      alert(demoReload.val());
-		      //执行重载
+		      //执行重载 
 		      table.reload('idReload', {
 		    	  url : '/admins/conditionBlog',
 		        page: {
