@@ -50,6 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		CsrfSecurityRequestMatcher csrfSecurityRequestMatcher = new CsrfSecurityRequestMatcher();
 		List<String> list = new ArrayList<String>();
 //		list.add("/admins/saveblog");
+		list.add("/admins/showBlog");
+		list.add("/admins/conditionBlog");
+		list.add("/admins/showType");
         csrfSecurityRequestMatcher.setExecludeUrls(list);
         return csrfSecurityRequestMatcher;
 	}

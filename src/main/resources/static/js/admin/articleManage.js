@@ -1,5 +1,7 @@
-layui.use('table', function(){
-	var table = layui.table;
+layui.use(['form', 'table'], function(){
+	var form = layui.form
+	,layer = layui.layer
+	,table = layui.table;
 	
 	table.render({
 	    elem: '#bligList'
@@ -9,13 +11,14 @@ layui.use('table', function(){
 //	    ,height: 515
 	    ,toolbar: '#toolbarDemo'
 	    ,defaultToolbar: ['filter']
-	    ,page:true
 	    ,cols: [[
 	    	{type: 'checkbox', fixed: 'left'}
-	      ,{field:'id', width:80, title: 'ID', sort: true, fixed: 'left'}
+	      ,{field:'id', width:65, title: 'ID', sort: true, fixed: 'left'}
 	      ,{field:'title', title: '标题',minWidth: 150}
 	      ,{field:'tags', width:150, title: '关键字'}
-	      ,{field:'type', width:100, title: '分类'}
+	      ,{field:'type', width:100, title: '分类',templet: function(d){
+	    	  return d.type.typeName;
+	      }}
 	      ,{field:'readSize', title: '浏览量', width:95, sort: true}
 	      ,{field:'drafts', width:95, title: '是否草稿',templet: function(d){
 	    	  return d.drafts == 0?"否":"是";
@@ -34,7 +37,9 @@ layui.use('table', function(){
 	      }}
 	      ,{fixed: 'right', title:'操作',width: 165, align:'center', toolbar: '#barDemo'}
 	    ]]
-	    
+		,id: 'idReload'
+		,page:true
+	
 	  });
 	
 	
@@ -82,7 +87,80 @@ layui.use('table', function(){
 	    }
 	  });
 	  
+	  form.on('select(selectType)', function(data){
+		  if(data.value == 3){
+			  $.ajax({
+				  url: "/admins/showType",
+				  type: "GET",
+				  dataType: "json",
+				  async: false,  
+				  cache: false,
+				  processData:false,  //不处理数据
+			      contentType:false,  //不设置内容类型
+			      success: function(data){
+					 if (data.success) {
+						 var datas =JSON.stringify(data.body);
+						 var jsondata = JSON.parse(datas);
+						 var boxHtml = '';
+						 $(".conditionBox").show();
+//						 
+						 for (var i = 0; i < jsondata.length; i++) {
+							 boxHtml += '    <option value="'+jsondata[i].id+'">'+jsondata[i].typeName+'</option>';
+				 		}
+						 $(".charu").append(boxHtml);
+						 form.render();
+					 } else {
+						 spop({template: data.message,position  : 'top-right',style: 'error',autoclose: 4000});
+					 }
+					 
+			     },
+			     error : function() {
+			    	 spop({template: '请求发生错误',position  : 'top-right',style: 'error',autoclose: 4000});
+			     }
+			      
+			  })
+		  }else{
+			  $("#queryType").html("");
+			  $(".conditionBox").css("display","none");
+			  form.render();
+		  }
+	  });
 	  
+	  var $ = layui.$, active = {
+		  reload: function(){
+		      
+		      var queryCondition =document.getElementById("selectType").value;
+		      var id=null;
+		      var title=null;
+		      var type=null;
+		      if(queryCondition == 1){
+		    	  id = $('#condition').val();
+		      }else if(queryCondition == 2){
+		    	  title = $('#condition').val();
+		      }else if(queryCondition == 3){
+		    	  type=document.getElementById("queryType").value;
+		    	  title = $('#condition').val();
+		      }
+//		      alert(demoReload.val());
+		      //执行重载
+		      table.reload('idReload', {
+		    	  url : '/admins/conditionBlog',
+		        page: {
+		          curr: 1 //重新从第 1 页开始
+		        }
+		        ,where: {
+		        	id: id,
+		        	title:title,
+		        	type:type
+		        }
+		      });
+		    }
+	  };
 	  
-	  
+	  //搜索
+	  $('.searchTable .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		  });
+
 });

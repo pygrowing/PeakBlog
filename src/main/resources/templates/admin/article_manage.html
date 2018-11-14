@@ -25,19 +25,16 @@
               
               <!-- <div> -->
               <form class="layui-form layui-form-pane" action="">
-	              	<div class="searchTable layui-form-item" style="" lay-filter="test1">
+	              	<div class="searchTable layui-form-item" style="">
 					  搜索关键字：
 					  <div class="layui-inline" style="margin-right: 0px;margin-bottom: 0px;" id="htmlBox">
 					    <input class="layui-input" name="id" id="condition" autocomplete="off" style="width: 250px;">
 					  </div>
 					  
 					  <div class="layui-inline conditionBox" style="margin-right: 0px;margin-bottom: 0px;width: 143px;display:none;">
-					  	<div class="layui-input-inline" style="width: 145px;">
-						  <select name="modules" lay-verify="required" lay-filter="selectType" id="selectType">
-						  	  <option value="0">测试用</option>
-						      <option value="1">ID</option>
-						      <option value="2">标题</option>
-						      <option value="3">分类</option>
+					  	<div class="layui-input-inline" style="width: 145px;" lay-filter="test1">
+						  <select name="modules" lay-verify="required" lay-filter="selectTypes" id="queryType" class="charu">
+						  	  <!-- <option value="0">选择类型</option> -->
 						  </select>
 						</div>
 					  </div>
@@ -45,7 +42,6 @@
 					  <div class="layui-inline" style="margin-right: 0px;margin-bottom: 0px;width: 143px;">
 					  	<div class="layui-input-inline" style="width: 145px;">
 						  <select name="modules" lay-verify="required" lay-filter="selectType" id="selectType">
-						  	  <option value="0">请选择查询条件</option>
 						      <option value="1">ID</option>
 						      <option value="2">标题</option>
 						      <option value="3">分类</option>
