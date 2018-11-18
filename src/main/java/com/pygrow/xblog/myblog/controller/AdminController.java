@@ -51,4 +51,10 @@ public class AdminController {
 		model.addAttribute("staff","2" );
 		return new ModelAndView("admin/article_edit","menuList",model);
 	}
+	
+	@GetMapping("/editManage")
+	public ModelAndView editManage(@ModelAttribute("blog")Blog blog, Model model) {
+		model.addAttribute("staff","3" );
+		return new ModelAndView("admin/article_manage","menuList",model);
+	}
 }
