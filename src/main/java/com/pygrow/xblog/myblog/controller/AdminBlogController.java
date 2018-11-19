@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.COUNT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,15 +118,14 @@ public class AdminBlogController implements UtilConstants{
 			@RequestParam(value = "limit", required = false, defaultValue = "5") int limit) {
 		Sort sort = new Sort(Direction.ASC,"id");
 		Pageable pageable = PageRequest.of(page-1, limit, sort);
-		List<Blog> blogs = blogService.ListBlogAll(pageable);
-		Long count = blogService.countBlog();
-//		model.addAttribute("data",page);
-//		return new ModelAndView("admin/article_manage","blogModel", model);
+		Page<Blog> pageBlog  =blogService.ListBlogAll(pageable);
+		List<Blog> blogs = pageBlog.getContent();
+		logger.info("博客总和"+pageBlog.getTotalElements());
 		Map<String,Object> map =new HashMap<String,Object>();
 		map.put("data", blogs);
 		map.put("code", "0");
 		map.put("msg", "");
-		map.put("count", count);
+		map.put("count", pageBlog.getTotalElements());
 		return map;
 	}
 	
@@ -149,12 +149,15 @@ public class AdminBlogController implements UtilConstants{
 		
 //		Type type = new Type();
 //		type.setId(typeid);
-		blogs = blogService.ListBlogByIdAndTitleAndTypeid(id, title, typeid, pageable);
+		Page<Blog> pageBlog = blogService.ListBlogByIdAndTitleAndTypeid(id, title, typeid, pageable);
+		blogs = pageBlog.getContent();
+		System.out.println("页数"+pageBlog.getTotalPages());
+		System.out.println("数据总和"+pageBlog.getTotalElements());
 		Map<String,Object> map =new HashMap<String,Object>();
 		map.put("data", blogs);
 		map.put("code", "0");
 		map.put("msg", "");
-		map.put("count", 15);
+		map.put("count", pageBlog.getTotalElements());
 		return map;
 	}
 	
