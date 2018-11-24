@@ -130,9 +130,9 @@ layui.use(['form', 'table'], function(){
 		  reload: function(){
 		      
 		      var queryCondition =document.getElementById("selectType").value;
-		      var id=null;
-		      var title=null;
-		      var type=null;
+		      var id="";
+		      var title="";
+		      var type="";
 		      if(queryCondition == 1){
 		    	  id = $('#condition').val();
 		      }else if(queryCondition == 2){
@@ -151,7 +151,7 @@ layui.use(['form', 'table'], function(){
 		        ,where: {
 		        	id: id,
 		        	title:title,
-		        	type:type
+		        	typeid:type
 		        }
 		      });
 		    }
