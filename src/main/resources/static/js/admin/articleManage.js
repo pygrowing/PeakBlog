@@ -135,7 +135,7 @@ layui.use(['form', 'table'], function(){
 		      var type="";
 		      if(queryCondition == 1){
 		    	  id = $('#condition').val();
-		      }else if(queryCondition == 2){
+		      }else if(queryCondition == 2){ 
 		    	  title = $('#condition').val();
 		      }else if(queryCondition == 3){
 		    	  type=document.getElementById("queryType").value;
