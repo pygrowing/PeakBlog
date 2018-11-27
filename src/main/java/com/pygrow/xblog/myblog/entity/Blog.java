@@ -1,6 +1,7 @@
 package com.pygrow.xblog.myblog.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,12 +43,19 @@ public class Blog implements Serializable {
 	@Column(name="handImage")
 	private String handImage;
 	//发表时间
-	@Column(name="releaseTime")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
+//	@Column(name="releaseTime")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+	@Column(nullable = false,name="releaseTime") // 映射为字段，值不能为空
+	private String createTime;
 	//分类
-	@Column(name="typeId")
-	private int type;
+//	@Column(name="typeId")
+//	private int type;
+	
+	@OneToOne
+	@JoinColumn(name="typeId") //在Blog添加外键typeId
+	private Type type;
+	
 	//标签
 	@Column(name="tags")
 	private String tags;
@@ -83,6 +93,12 @@ public class Blog implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+//	public Long getLogId() {
+//		return logId;
+//	}
+//	public void setLogId(Long logId) {
+//		this.logId = logId;
+//	}
 	public String getTitle() {
 		return title;
 	}
@@ -101,16 +117,22 @@ public class Blog implements Serializable {
 	public void setHandImage(String handImage) {
 		this.handImage = handImage;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public int getType() {
+//	public int getType() {
+//		return type;
+//	}
+//	public void setType(int type) {
+//		this.type = type;
+//	}
+	public Type getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 	public String getTags() {
